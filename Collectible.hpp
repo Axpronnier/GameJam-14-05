@@ -17,7 +17,7 @@ class Collectible {
         int GetY() const { return _y; }
         SDL_Texture * GetTexture() const { return _texture; }
         bool GetAfficher() const { return _afficher; }
-        void SetAfficher(bool afficher) {afficher = _afficher; }
+        void SetAfficher(bool afficher) {_afficher = afficher; }
 
         void Deplacer(int x, int y);
 };

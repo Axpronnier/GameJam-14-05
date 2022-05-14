@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <list>
 #include "Perso.hpp"
 
 Perso::Perso(int x, int y, vector<Collectible> * inventaire):
@@ -29,7 +30,6 @@ void Perso::Sauter(int ** map)
 void Perso::Grimper(int ** map, Direction direction)
 {
     //Tabeau de colision des coins : HG, HD, BD, BG
-    bool bordures[4] = {false, false, false, false};
     bool echelles[4] = {false, false, false, false};
     bool collisions[4] = {false, false, false, false};
     bool collisions2[4] = {false, false, false, false};
@@ -86,7 +86,6 @@ void Perso::Deplacer(int ** map, Direction direction)
     //Tabeau de colision des coins : HG, HD, BD, BG
     bool collisions[4] = {false, false, false, false};
     bool collisions2[4] = {false, false, false, false};
-    bool echelles[4] = {false, false, false, false};
     int new_x = _x;
     int new_y = _y;
 
@@ -137,10 +136,10 @@ void Perso::AjouterInventaire(Collectible &objet)
 
 void Perso::RetirerInventaire(int index)
 {
-    
+    _inventaire->erase(_inventaire->begin() + index);
 }
 
-void Perso::Bordure(int ** map, int x, int y, bool coins[4])
+void Perso::Bordure(int x, int y, bool coins[4])
 {
     //Test de validité des coordonées au cas où
     if (x < - dimCase || x > mapW || y < - dimCase || y < mapH)
@@ -168,7 +167,7 @@ void Perso::Bordure(int ** map, int x, int y, bool coins[4])
 
 void Perso::Echelle(int ** map, int x, int y, bool coins[4])
 {
-    Bordure(map, x, y, coins);
+    Bordure(x, y, coins);
 
     if (!coins[0] && map[y / dimCase][x / dimCase] == 2)
     {
@@ -193,7 +192,7 @@ void Perso::Echelle(int ** map, int x, int y, bool coins[4])
 
 void Perso::Vide(int ** map, int x, int y, bool coins[4])
 {
-    Bordure(map, x, y, coins);
+    Bordure(x, y, coins);
 
     if (!coins[0] && map[y / dimCase][x / dimCase] == 0)
     {
@@ -222,7 +221,7 @@ void Perso::Collision(int ** map, int x, int y, bool coins[4])
     bool vides[4] = {false, false, false, false};
     bool echelles[4] = {false, false, false, false};
 
-    Bordure(map, x, y, bordures);
+    Bordure(x, y, bordures);
     Vide(map, x, y, vides);
     Echelle(map, x, y, echelles);
     

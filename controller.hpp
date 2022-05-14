@@ -8,10 +8,17 @@
 #define WPERSO 1*SIZECELL
 
 #include "Perso.hpp"
+<<<<<<< HEAD
 #include "collectible.hpp"
 #include "interactible.hpp"
 #include <iostream>
 #include <fstream>
+=======
+#include "Collectible.hpp"
+#include "Interactible.hpp"
+
+class Personnage {};
+>>>>>>> 7df0ff273f0d512a184c34953a0926947013ca7a
 
 class Controller {
 public:

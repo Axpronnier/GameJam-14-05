@@ -5,7 +5,7 @@ CXX=g++
 EXE=./prog
 EXE_TEST=../test/progTest
 
-CXXFLAGS+=-Wall -Wextra -MMD -g -O2 -fdiagnostics-color=auto
+CXXFLAGS+=-Wall -Wextra -MMD -g -fdiagnostics-color=auto
 LDFLAGS= -lSDL2 -lSDL2_image -lSDL2_ttf
 
 OBJ=$(addprefix ../build/,$(SRC:.cpp=.o))

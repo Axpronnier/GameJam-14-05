@@ -1,6 +1,8 @@
 #ifndef INTERACTIBLE_HPP
 #define INTERACTIBLE_HPP
 
+#include "dessin.hpp"
+
 class Interactible {
     int _x;
     int _y;
@@ -20,6 +22,7 @@ class Interactible {
         int GetEnigme() const { return _enigme; }
         void SetEtat(int etat) {_etat = etat; }
 
+        void afficher(SDL_Renderer* renderer,int posx, int posy);
         void Deplacer(int x, int y);
 };
 

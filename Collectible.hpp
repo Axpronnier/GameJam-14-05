@@ -1,7 +1,7 @@
 #ifndef COLLECTIBLE_HPP
 #define COLLECTIBLE_HPP
 
-#include <SDL2/SDL.h>
+#include "dessin.hpp"
 
 class Collectible {
     int _x;
@@ -19,6 +19,7 @@ class Collectible {
         bool GetAfficher() const { return _afficher; }
         void SetAfficher(bool afficher) {_afficher = afficher; }
 
+        void afficher(SDL_Renderer* renderer,int posx, int posy);
         void Deplacer(int x, int y);
 };
 

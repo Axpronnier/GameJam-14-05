@@ -9,9 +9,9 @@
 
 #define WSCREEN 1000
 #define HSCREEN 600
-#define TILE 50
-#define WPERSO 1.6*TILE
-#define HPERSO 1*TILE 
+#define SIZECELL 50
+#define WPERSO 1.6*SIZECELL
+#define HPERSO 1*SIZECELL 
 
 SDL_Texture* chargertexture(SDL_Renderer *renderer, const char* nom);
 SDL_Texture *creertxt(SDL_Renderer *renderer,const char* texte, TTF_Font *font, SDL_Color couleur);

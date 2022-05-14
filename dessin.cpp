@@ -34,26 +34,26 @@ void afficher_map(SDL_Renderer *renderer, int **map, int posx, int posy, SDL_Tex
     int xcase = 0;
     int ycase = 0;
     SDL_Rect destination;
-    destination.h = TILE;
-    destination.w = TILE;
-    while (x < right+TILE)
+    destination.h = SIZECELL;
+    destination.w = SIZECELL;
+    while (x < right+SIZECELL)
     {
         if (x > 0)
         {
-            while (y < down+TILE)
+            while (y < down+SIZECELL)
             {
                 if (y > 0)
                 {
-                    xcase = x / TILE;
-                    ycase = y / TILE;
-                    destination.x = xcase * TILE -left;
-                    destination.y = ycase * TILE - up;
+                    xcase = x / SIZECELL;
+                    ycase = y / SIZECELL;
+                    destination.x = xcase * SIZECELL -left;
+                    destination.y = ycase * SIZECELL - up;
                     SDL_RenderCopy(renderer, tab_texture[map[xcase][ycase]], NULL, &destination);
                 }
-                y = y + TILE;
+                y = y + SIZECELL;
             }
             y = up;
         }
-        x = x + TILE;
+        x = x + SIZECELL;
     }
 }

@@ -30,7 +30,7 @@ class Perso {
         void RetirerInventaire(int index);
 
     private:
-        void Bordure(int ** map, int x, int y, bool coins[4]);
+        void Bordure(int x, int y, bool coins[4]);
         void Echelle(int ** map, int x, int y, bool coins[4]); 
         void Vide(int ** map, int x, int y, bool coins[4]);
         void Collision(int ** map, int x, int y, bool coins[4]);

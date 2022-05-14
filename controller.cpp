@@ -8,6 +8,12 @@ Controller::Controller ()
     mapfile.open("map.txt");
     mapfile >> _mapLines; //flux.get pour récup tout, ptet getline pour récup qu'une ligne
     mapfile >> _mapCol; 
+    _map = (int **) malloc(_mapLines*sizeof(int *));
+    for (int i=0;i<_mapLines;++i)
+    {
+        _map[i]=(int *) malloc(_mapCol*sizeof(int));
+        //remplir le _map[i] grace au fichier
+    }
 }
 
 void Controller::controller(bool userInput[], int clickX, int clickY) // 0 : droite, 1 : gauche, 2: haut, 3: bas

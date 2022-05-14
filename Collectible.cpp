@@ -8,3 +8,9 @@ void Collectible::afficher(SDL_Renderer* renderer,int posx, int posy)
     destination.y=posy-_y+HSCREEN/2-HPERSO/2;
     SDL_RenderCopy(renderer,_texture,NULL,&destination);
 }
+
+void Collectible::Deplacer(int x, int y)
+{
+    _x = x;
+    _y = y;
+}

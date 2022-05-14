@@ -20,7 +20,17 @@ void Controller::controller(bool userInput[], int clickX, int clickY) // 0 : dro
     {
         if (_collectibles[c].GetX()==clickedCellX && _collectibles[c].GetY()==clickedCellY)
         {
-            
+            //et mettre dans le sac et desafficher
         }
+        //check affichage 
+    }
+
+    for (int i=0; i<_interactibles; ++i)
+    {
+        if (interactibles[i].GetX()==clickedCellX && interactibles[i].GetY()==clickedCellY)
+        {
+            //et utiliser enigme
+        }
+        //check affichage 
     }
 }

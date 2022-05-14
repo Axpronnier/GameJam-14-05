@@ -10,13 +10,15 @@
 #include "Perso.hpp"
 #include "collectible.hpp"
 #include "interactible.hpp"
+#include <iostream>
+#include <fstream>
 
 class Controller {
 public:
     Controller ();
     void controller(int userInput);
 private:
-    Personnage _personnage;
+    Perso _personnage;
     int ** _map;
     Collectible * _collectibles;
     int _ncollectibles;

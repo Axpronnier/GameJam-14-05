@@ -1,7 +1,11 @@
 #include "controller.hpp"
 
-Controller::Controller () 
+
+Controller::Controller ()
 {
+    _personnage = new Perso()
+    ofstream mapfile;
+    mapfile.open("map.txt");
 
 }
 
@@ -26,6 +30,7 @@ void Controller::controller(bool userInput[], int clickX, int clickY) // 0 : dro
         _personnage.Grimper(_map,Direction::Bas)
     }
 
+    afficherMap(_map,_personnage);
 
     // CHECK CLICK
     clickMapX= _personnage.GetX() + WPERSO/2 - WSCREEN/2 + clickX;
@@ -56,4 +61,6 @@ void Controller::controller(bool userInput[], int clickX, int clickY) // 0 : dro
             _interactibles[i].afficher(_personnage.GetX(),_personnage.GetY())
         } 
     }
+
+    Perso.afficher()
 }

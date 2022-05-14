@@ -3,8 +3,8 @@
 
 Controller::Controller ()
 {
-    _personnage = * new Perso()
-    ofstream mapfile;
+    _personnage = * new Perso();
+    ifstream mapfile;
     mapfile.open("map.txt");
     mapfile >> _mapLines; //flux.get pour récup tout, ptet getline pour récup qu'une ligne
     mapfile >> _mapCol; 
@@ -31,7 +31,7 @@ void Controller::controller(bool userInput[], int clickX, int clickY) // 0 : dro
         _personnage.Grimper(_map,Direction::Bas);
     }
 
-    afficherMap(_map,_personnage);
+    //afficherMap(_map,_personnage);
 
     // CHECK CLICK
     int clickMapX= _personnage.GetX() + WPERSO/2 - WSCREEN/2 + clickX;
@@ -45,23 +45,23 @@ void Controller::controller(bool userInput[], int clickX, int clickY) // 0 : dro
         if (_collectibles[c].GetX()/SIZECELL==clickedCellX && _collectibles[c].GetY()/SIZECELL==clickedCellY)
         {
             _personnage.AjouterInventaire(_collectibles[c]);
-            _collectibles[c].setAffiche(false);
+            _collectibles[c].SetAfficher(false);
         }
-        if (_collectibles[c].GetX()/SIZECELL<_personnage.getX()+(2*WSCREEN/3) && _collectibles[c].GetX()/SIZECELL>_personnage.getX()-(2*WSCREEN/3) && _collectibles[c].GetY()/SIZECELL<_personnage.getY()+(2*HSCREEN/3) && _collectibles[c].GetY()/SIZECELL>_personnage.getY()-(2*HSCREEN/3)) {
-            _collectibles[c].afficher(_personnage.GetX(),_personnage.GetY());
+        if (_collectibles[c].GetX()/SIZECELL<_personnage.GetX()+(2*WSCREEN/3) && _collectibles[c].GetX()/SIZECELL>_personnage.GetX()-(2*WSCREEN/3) && _collectibles[c].GetY()/SIZECELL<_personnage.GetY()+(2*HSCREEN/3) && _collectibles[c].GetY()/SIZECELL>_personnage.GetY()-(2*HSCREEN/3)) {
+            //_collectibles[c].afficher(_personnage.GetX(),_personnage.GetY());
         } 
     }
 
-    for (int i=0; i<_interactibles; ++i)
+    for (int i=0; i<_ninteractibles; ++i)
     {
         if (_interactibles[i].GetX()/SIZECELL==clickedCellX && _interactibles[i].GetY()/SIZECELL==clickedCellY);
         {
-            _interactibles[i].enigme();
+            _interactibles[i].GetEnigme()(_interactibles[i]);
         }
-        if (_interactibles[i].GetX()/SIZECELL<_personnage.getX()+(2*WSCREEN/3) && _interactibles[i].GetX()/SIZECELL>_personnage.getX()-(2*WSCREEN/3) && _interactibles[i].GetY()/SIZECELL<_personnage.getY()+(2*HSCREEN/3) && _interactibles[i].GetY()/SIZECELL>_personnage.getY()-(2*HSCREEN/3)) {
-            _interactibles[i].afficher(_personnage.GetX(),_personnage.GetY());
+        if (_interactibles[i].GetX()/SIZECELL<_personnage.GetX()+(2*WSCREEN/3) && _interactibles[i].GetX()/SIZECELL>_personnage.GetX()-(2*WSCREEN/3) && _interactibles[i].GetY()/SIZECELL<_personnage.GetY()+(2*HSCREEN/3) && _interactibles[i].GetY()/SIZECELL>_personnage.GetY()-(2*HSCREEN/3)) {
+            //_interactibles[i].afficher(_personnage.GetX(),_personnage.GetY());
         } 
     }
 
-    Perso.afficher()
+    //Perso.afficher();
 }

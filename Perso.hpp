@@ -8,10 +8,10 @@
 using namespace std;
 
 class Perso {
-    //position et vitesse du personnage en pixels
+    //position et vitesse du personnage en pixels, toujours valides car amitrisée par les méthodes de déplacement.
     int _x;
     int _y;
-    int _vy;
+    int _vSaut;
     vector<Collectible> * _inventaire;
 
     public:
@@ -30,7 +30,10 @@ class Perso {
         void RetirerInventaire(int index);
 
     private:
-        vector<Direction> Collision(int ** map);
+        void Bordure(int ** map, int x, int y, bool coins[4]);
+        void Echelle(int ** map, int x, int y, bool coins[4]); 
+        void Vide(int ** map, int x, int y, bool coins[4]);
+        void Collision(int ** map, int x, int y, bool coins[4]);
 };
 
 #endif

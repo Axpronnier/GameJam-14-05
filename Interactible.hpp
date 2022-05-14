@@ -13,7 +13,6 @@ class Interactible {
     std::list<Interactible*> Element;
 
     public:
-        //Interactible():_x(0),_y(0),_texture(nullptr),_etat(0),_enigme(nullptr),Element{} {}
         Interactible(int x, int y, SDL_Texture * texture);
         Interactible(int x, int y, SDL_Texture * texture, int etat);
         Interactible(int x, int y, SDL_Texture * texture, int etat, int enigme);

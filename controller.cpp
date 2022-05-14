@@ -56,7 +56,7 @@ void Controller::controller(bool userInput[], int clickX, int clickY) // 0 : dro
     {
         if (_interactibles[i].GetX()/SIZECELL==clickedCellX && _interactibles[i].GetY()/SIZECELL==clickedCellY)
         {
-            _interactibles[i].GetEnigme()(_interactibles[i]);
+            _interactibles[i].ExecEnigme();
         }
         if (_interactibles[i].GetX()/SIZECELL<_personnage.GetX()+(2*WSCREEN/3) && _interactibles[i].GetX()/SIZECELL>_personnage.GetX()-(2*WSCREEN/3) && _interactibles[i].GetY()/SIZECELL<_personnage.GetY()+(2*HSCREEN/3) && _interactibles[i].GetY()/SIZECELL>_personnage.GetY()-(2*HSCREEN/3)) {
             //_interactibles[i].afficher(_personnage.GetX(),_personnage.GetY());

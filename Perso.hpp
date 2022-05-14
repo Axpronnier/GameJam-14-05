@@ -3,12 +3,12 @@
 
 #include <vector>
 #include "ConstantesDeplacement.hpp"
+#include "Collectible.hpp"
 
 using namespace std;
 
-class Collectible {};
-
 class Perso {
+    //position et vitesse du personnage en pixels
     int _x;
     int _y;
     int _vy;
@@ -26,11 +26,11 @@ class Perso {
         void Sauter(int ** map);
         void Grimper(int ** map, Direction direction);
         void Deplacer(int ** map, Direction direction);
-        void AjouterInventaire(Collectible objet);
+        void AjouterInventaire(Collectible &objet);
         void RetirerInventaire(int index);
 
     private:
-        Direction Collision(int ** map);
+        vector<Direction> Collision(int ** map);
 };
 
 #endif

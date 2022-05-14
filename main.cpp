@@ -1,11 +1,8 @@
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <iostream>
+#include "dessin.hpp"
+#include <random>
 
 int main(int argv, char ** argc)
 {  
-
     if (SDL_Init(SDL_INIT_VIDEO) == -1)
     {
         fprintf(stderr, "Erreur d'initialisation de la SDL : %s\n", SDL_GetError());
@@ -43,6 +40,23 @@ int main(int argv, char ** argc)
     //font1 = TTF_OpenFont("../res/arial.ttf", 15);
     //font2 = TTF_OpenFont("../res/arial.ttf", 12);
     //font3 = TTF_OpenFont("../res/arial.ttf", 23);
+
+    //mon test pour l'affichage de la map
+    SDL_Texture* tab_texture[2];
+    tab_texture[0]=chargertexture(renderer, "sprit/Bleu.png");
+    tab_texture[1]=chargertexture(renderer, "sprit/marron.jpg");
+
+    int** map=(int**)malloc(50*sizeof(int*));
+    for (int k=0;k<50;k++)
+    {
+        map[k]=(int*)malloc(50*sizeof(int*));
+        for (int i=0;i<50;i++)
+        {
+            map[k][i]=rand()%2;
+        }
+    }
+    int posx=1000;
+    int posy=1000;
 
     int flags = IMG_INIT_JPG | IMG_INIT_PNG;
     int initted = 0;
@@ -92,8 +106,11 @@ int main(int argv, char ** argc)
             }
             break;
         }
+        posx=posx+10;
+        posy=posy+10;
+        afficher_map(renderer,map,posx,posy,tab_texture);
         SDL_RenderPresent(renderer);
-        SDL_Delay(10);
+        SDL_Delay(1000);
     }
 
     SDL_DestroyRenderer(renderer);

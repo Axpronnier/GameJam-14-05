@@ -54,7 +54,7 @@ void Controller::controller(bool userInput[], int clickX, int clickY) // 0 : dro
 
     for (int i=0; i<_ninteractibles; ++i)
     {
-        if (_interactibles[i].GetX()/SIZECELL==clickedCellX && _interactibles[i].GetY()/SIZECELL==clickedCellY);
+        if (_interactibles[i].GetX()/SIZECELL==clickedCellX && _interactibles[i].GetY()/SIZECELL==clickedCellY)
         {
             _interactibles[i].ExecEnigme();
         }

@@ -2,12 +2,12 @@
 #define CONTROLLERHPPJAM
 
 #define SIZECELL 50
-#define HPERSO 1.6
-#define WPERSO 1
 #define HSCREEN 600
 #define WSCREEN 1000
+#define HPERSO 1.6*SIZECELL
+#define WPERSO 1*SIZECELL
 
-#include "personage.hpp"
+#include "Perso.hpp"
 #include "collectible.hpp"
 #include "interactible.hpp"
 

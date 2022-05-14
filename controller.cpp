@@ -10,8 +10,8 @@ void Controller::controller(bool userInput[], int clickX, int clickY) // 0 : dro
     //deplacement
 
 
-    clickMapX= _personnage.GetX() + WPERSO*SIZECELL/2 - WSCREEN/2 + clickX;
-    clickMapY= _personnage.GetY() + HPERSO*SIZECELL/2 - HSCREEN/2 + clickY;
+    clickMapX= _personnage.GetX() + WPERSO/2 - WSCREEN/2 + clickX;
+    clickMapY= _personnage.GetY() + HPERSO/2 - HSCREEN/2 + clickY;
 
     clickedCellX=clickMapX/SIZECELL;
     clickedCellY=clickMapY/SIZECELL;

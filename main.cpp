@@ -115,6 +115,7 @@ int main(int argv, char ** argc)
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    for (int k = 0; k < 2; k++) SDL_DestroyTexture(tab_texture[k]);
     IMG_Quit();
     TTF_Quit();
     SDL_Quit();

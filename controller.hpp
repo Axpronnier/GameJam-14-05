@@ -18,9 +18,11 @@ class Personnage {};
 class Controller {
 public:
     Controller ();
-    void controller(int userInput);
+    void controller(bool *, int, int);
 private:
     Perso _personnage;
+    int _mapLines;
+    int _mapCol;
     int ** _map;
     Collectible * _collectibles;
     int _ncollectibles;

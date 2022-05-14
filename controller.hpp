@@ -7,9 +7,11 @@
 #define HSCREEN 600
 #define WSCREEN 1000
 
-#include "personage.hpp"
-#include "collectible.hpp"
-#include "interactible.hpp"
+#include "Perso.hpp"
+#include "Collectible.hpp"
+#include "Interactible.hpp"
+
+class Personnage {};
 
 class Controller {
 public:

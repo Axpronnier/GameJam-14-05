@@ -4,13 +4,12 @@
 #include <math.h>
 #include "Perso.hpp"
 
-
-Perso::Perso(int x, int y, vector<Collectible> * inventaire):
-    _x(x), _y(y), _vSaut(0), _inventaire(inventaire)
+Perso::Perso(int x, int y, vector<Collectible> * inventaire,SDL_Texture* texture):
+    _x(x), _y(y), _vSaut(0), _inventaire(inventaire), _texture(texture)
 {}
 
 Perso::Perso(int x, int y):
-    Perso(x, y, new vector<Collectible>())
+    Perso(x, y, new vector<Collectible>(),nullptr)
 {}
 
 Perso::Perso():
@@ -95,6 +94,16 @@ void Perso::Deplacer(int ** map, Direction direction)
 
     _x = new_x;
     _y = new_y;
+}
+
+void Perso::Afficher(SDL_Renderer *renderer)
+{
+    SDL_Rect destination;
+    destination.x=WSCREEN/2-WPERSO/2;
+    destination.y=HSCREEN/2-HPERSO/2;
+    destination.w=WPERSO;
+    destination.h=HPERSO;
+    SDL_RenderCopy(renderer,_texture,NULL,&destination);
 }
 
 void Perso::AjouterInventaire(Collectible &objet)

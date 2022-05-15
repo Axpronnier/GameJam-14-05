@@ -1,4 +1,4 @@
-#include "dessin.hpp"
+#include "controller.hpp"
 #include <random>
 
 int main(int argv, char ** argc)
@@ -45,6 +45,10 @@ int main(int argv, char ** argc)
     SDL_Texture* tab_texture[2];
     tab_texture[0]=chargertexture(renderer, "sprit/Bleu.png");
     tab_texture[1]=chargertexture(renderer, "sprit/marron.jpg");
+    SDL_Texture* textureperso=chargertexture(renderer,"sprit/personnage.webp");
+    SDL_Texture* texturebouton[2];
+    texturebouton[0]=chargertexture(renderer,"sprit/bouton.jpeg");
+    texturebouton[1]=chargertexture(renderer,"sprit/boutonb.jpeg");
 
     int** map=(int**)malloc(50*sizeof(int*));
     for (int k=0;k<50;k++)
@@ -55,9 +59,27 @@ int main(int argv, char ** argc)
             map[k][i]=rand()%2;
         }
     }
-    int posx=1000;
-    int posy=1000;
+    Interactible* stock[9];
+    for (int k=0;k<3;k++)
+    {
+        for (int i=0;i<3;i++)
+        {
+            Interactible temp(k*SIZECELL,i*SIZECELL,texturebouton,0,1);
+            stock[3*k+i]=&temp;
+        }
+    }
 
+    for (int k=0;k<9;k++)
+    {
+        for (int i=0;i<9;i++)
+        {
+            stock[k]->GetElement().push_back(stock[i]);
+        }
+    }
+
+    int posx=50;
+    int posy=100;
+    Perso perso(posx,posy,nullptr,textureperso);
     int flags = IMG_INIT_JPG | IMG_INIT_PNG;
     int initted = 0;
     initted = IMG_Init(flags);
@@ -69,6 +91,7 @@ int main(int argv, char ** argc)
 
     SDL_Event event;
     bool running = true;
+    bool user_input[4]={false,false,false,false}; //{droite,gauche,haut,bas}
     while (running)
     {
         while (SDL_PollEvent(&event))
@@ -95,6 +118,30 @@ int main(int argv, char ** argc)
                 case SDLK_ESCAPE:
                     running = false;
                     break;
+                case SDLK_RIGHT:
+                    user_input[0]=true;
+                    break;
+                case SDLK_d:
+                    user_input[0]=true;
+                    break;
+                case SDLK_LEFT:
+                    user_input[1]=true;
+                    break;
+                case SDLK_q:
+                    user_input[1]=true;
+                    break;
+                case SDLK_UP:
+                    user_input[2]=true;
+                    break;
+                case SDLK_z:
+                    user_input[2]=true;
+                    break;
+                case SDLK_DOWN:
+                    user_input[3]=true;
+                    break;
+                case SDLK_s:
+                    user_input[3]=true;
+                    break;
                 }
                 break;
             case SDL_MOUSEBUTTONDOWN:
@@ -106,11 +153,15 @@ int main(int argv, char ** argc)
             }
             break;
         }
-        posx=posx+10;
-        posy=posy+10;
         afficher_map(renderer,map,posx,posy,tab_texture);
+        for (int k=0;k<9;k++)
+        {
+            stock[k]->Afficher(renderer,posx,posy);
+        }
+        perso.Afficher(renderer);
         SDL_RenderPresent(renderer);
-        SDL_Delay(1000);
+        for (int k=0;k<4;k++) user_input[k]=false;
+        SDL_Delay(10);
     }
 
     SDL_DestroyRenderer(renderer);

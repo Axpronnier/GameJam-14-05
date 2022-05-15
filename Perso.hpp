@@ -4,6 +4,7 @@
 #include <vector>
 #include "ConstantesDeplacement.hpp"
 #include "Collectible.hpp"
+#include "dessin.hpp"
 
 using namespace std;
 
@@ -13,15 +14,17 @@ class Perso {
     int _y;
     int _vSaut;
     vector<Collectible> * _inventaire;
+    SDL_Texture* _texture;
 
     public:
         Perso();
         Perso(int x, int y);
-        Perso(int x, int y, vector<Collectible> * inventaire);
+        Perso(int x, int y, vector<Collectible> * inventaire,SDL_Texture*);
 
         int GetX() const { return _x; }
         int GetY() const { return _y; }
         vector<Collectible> * GetInventaire() const {return _inventaire; }
+        void Afficher(SDL_Renderer *renderer);
         
         void Sauter(int ** map);
         void Grimper(int ** map, Direction direction);

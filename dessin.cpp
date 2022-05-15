@@ -38,17 +38,17 @@ void afficher_map(SDL_Renderer *renderer, int **map, int posx, int posy, SDL_Tex
     destination.w = SIZECELL;
     while (x < right+SIZECELL)
     {
-        if (x > 0)
+        if (x > 0 and x<(SIZECELL*50))
         {
             while (y < down+SIZECELL)
             {
-                if (y > 0)
+                if (y > 0 and y<(SIZECELL*50))
                 {
                     xcase = x / SIZECELL;
                     ycase = y / SIZECELL;
                     destination.x = xcase * SIZECELL -left;
                     destination.y = ycase * SIZECELL - up;
-                    SDL_RenderCopy(renderer, tab_texture[map[xcase][ycase]], NULL, &destination);
+                    SDL_RenderCopy(renderer,tab_texture[map[xcase][ycase]],NULL,&destination);
                 }
                 y = y + SIZECELL;
             }

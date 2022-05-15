@@ -3,7 +3,7 @@
 
 Controller::Controller (SDL_Renderer *renderer)
 {
-    _personnage = * new Perso();
+    _personnage = * new Perso(51,51);
     ifstream mapfile;
     mapfile.open("map.txt");
     mapfile >> _mapLines; //flux.get pour récup tout, ptet getline pour récup qu'une ligne
@@ -114,9 +114,7 @@ void Controller::controller(bool userInput[], int clickX, int clickY, SDL_Render
             _personnage.AjouterInventaire(_collectibles[c]);
             _collectibles[c].SetAfficher(false);
         }
-        if (_collectibles[c].GetX()/SIZECELL<_personnage.GetX()+(2*WSCREEN/3) && _collectibles[c].GetX()/SIZECELL>_personnage.GetX()-(2*WSCREEN/3) && _collectibles[c].GetY()/SIZECELL<_personnage.GetY()+(2*HSCREEN/3) && _collectibles[c].GetY()/SIZECELL>_personnage.GetY()-(2*HSCREEN/3)) {
-            _collectibles[c].Afficher(renderer ,_personnage.GetX(),_personnage.GetY());
-        } 
+        _collectibles[c].Afficher(renderer ,_personnage.GetX(),_personnage.GetY());
         std::cout << "forcol";
     }
 

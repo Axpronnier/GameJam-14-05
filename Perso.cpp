@@ -21,11 +21,14 @@ void Perso::Sauter(int ** map)
     //Tabeau de colision des coins : HG, HD, BD, BG
     int cases[6];
 
-    GetCases(map, _x - 1, _y - 1, cases);
+    cout << endl << endl << endl << endl << endl << "Pour le saut on a :" << endl;
+    GetCases(map, _x + 1, _y + 1, cases);
+    cout << endl << endl << endl << endl << endl;
 
     if (CollisionCase(cases[3]) || CollisionCase(cases[4]))
     {
         _vSaut = vitesseSaut;
+        cout << endl << endl << endl << "!!! SAUT !!!" <<endl << endl << endl;
     }
 }
 

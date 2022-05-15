@@ -80,6 +80,8 @@ int main(int argv, char ** argc)
     Controller control(renderer);
     int posx=50;
     int posy=100;
+    int xsouris=0;
+    int ysouris=0;
     Perso perso(posx,posy,nullptr,textureperso);
     int flags = IMG_INIT_JPG | IMG_INIT_PNG;
     int initted = 0;
@@ -147,6 +149,9 @@ int main(int argv, char ** argc)
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 std::cout << event.button.x << event.button.y << std::endl;
+                xsouris=event.button.x;
+                ysouris=event.button.y;
+                /*
                 for (int k=0;k<9;k++)
                 {
                     if (event.button.x>stock[k]->GetX() and event.button.x<(stock[k]->GetX()+SIZECELL))
@@ -156,7 +161,7 @@ int main(int argv, char ** argc)
                             Enigme_carre_blanc(stock[k]);
                         }
                     }
-                }
+                }*/
                 break;
             case SDL_QUIT:
                 running = 0;

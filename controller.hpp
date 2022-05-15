@@ -21,7 +21,7 @@ public:
     int _mapCol;
     Collectible * _collectibles;
     int _ncollectibles;
-    Interactible * _interactibles;
+    Interactible ** _interactibles;
     int _ninteractibles;
 };
 

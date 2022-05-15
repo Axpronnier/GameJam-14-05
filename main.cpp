@@ -47,9 +47,6 @@ int main(int argv, char ** argc)
     tab_texture[1]=chargertexture(renderer, "sprit/Mur.png");
     tab_texture[2]=chargertexture(renderer,"sprit/Echelle.png");
     SDL_Texture* textureperso=chargertexture(renderer,"sprit/personnage.webp");
-    SDL_Texture* texturebouton[2];
-    texturebouton[0]=chargertexture(renderer,"sprit/Bouton1.png");
-    texturebouton[1]=chargertexture(renderer,"sprit/Bouton2.png");
 
     int** map=(int**)malloc(50*sizeof(int*));
     for (int k=0;k<50;k++)
@@ -60,26 +57,12 @@ int main(int argv, char ** argc)
             map[k][i]=rand()%3;
         }
     }
-    Interactible* stock[9];
-    for (int k=0;k<3;k++)
-    {
-        for (int i=0;i<3;i++)
-        {
-            Interactible* temp=new Interactible((k+2)*SIZECELL,(i+2)*SIZECELL,texturebouton,0,1);
-            stock[3*k+i]=temp;
-        }
-    }
 
-    for (int k=0;k<9;k++)
-    {
-        for (int i=0;i<9;i++)
-        {
-            stock[k]->AddElement(stock[i]);
-        }
-    }
     Controller control(renderer);
     int posx=50;
     int posy=100;
+    int xsouris=-1;
+    int ysouris=-1;
     Perso perso(posx,posy,nullptr,textureperso);
     int flags = IMG_INIT_JPG | IMG_INIT_PNG;
     int initted = 0;
@@ -147,6 +130,9 @@ int main(int argv, char ** argc)
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 std::cout << event.button.x << event.button.y << std::endl;
+                xsouris=event.button.x;
+                ysouris=event.button.y;
+                /*
                 for (int k=0;k<9;k++)
                 {
                     if (event.button.x>stock[k]->GetX() and event.button.x<(stock[k]->GetX()+SIZECELL))
@@ -156,7 +142,7 @@ int main(int argv, char ** argc)
                             Enigme_carre_blanc(stock[k]);
                         }
                     }
-                }
+                }*/
                 break;
             case SDL_QUIT:
                 running = 0;
@@ -165,15 +151,17 @@ int main(int argv, char ** argc)
             break;
         }
         
-        for (int k=0;k<9;k++)
-        {
-            stock[k]->Afficher(renderer,posx,posy);
-        }
-        control.controller(user_input,0,0,renderer,tab_texture);
+        control.controller(user_input,xsouris,ysouris,renderer,tab_texture);
         perso.Afficher(renderer);
         SDL_RenderPresent(renderer);
         for (int k=0;k<4;k++) user_input[k]=false;
+<<<<<<< HEAD
         SDL_Delay(30);
+=======
+        xsouris=-1;
+        ysouris=-1;
+        SDL_Delay(10);
+>>>>>>> 3097fa2e3d1554d3704450d3cf5b1d6def816d1d
     }
 
     SDL_DestroyRenderer(renderer);

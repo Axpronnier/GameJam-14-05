@@ -102,7 +102,7 @@ void Controller::controller(bool userInput[], int clickX, int clickY, SDL_Render
     {
         if (_interactibles[i].GetX()/SIZECELL==clickedCellX && _interactibles[i].GetY()/SIZECELL==clickedCellY)
         {
-            //_interactibles[i].ExecEnigme();
+            std::cout << "test";
         }
         if (_interactibles[i].GetX()/SIZECELL<_personnage.GetX()+(2*WSCREEN/3) && _interactibles[i].GetX()/SIZECELL>_personnage.GetX()-(2*WSCREEN/3) && _interactibles[i].GetY()/SIZECELL<_personnage.GetY()+(2*HSCREEN/3) && _interactibles[i].GetY()/SIZECELL>_personnage.GetY()-(2*HSCREEN/3)) {
             //_interactibles[i].afficher(renderer,_personnage.GetX(),_personnage.GetY());

@@ -21,11 +21,14 @@ void Perso::Sauter(int ** map)
     //Tabeau de colision des coins : HG, HD, BD, BG
     int cases[6];
 
-    GetCases(map, _x - 1, _y - 1, cases);
+    cout << endl << endl << endl << endl << endl << "Pour le saut on a :" << endl;
+    GetCases(map, _x + 1, _y + 1, cases);
+    cout << endl << endl << endl << endl << endl;
 
     if (CollisionCase(cases[3]) || CollisionCase(cases[4]))
     {
         _vSaut = vitesseSaut;
+        cout << endl << endl << endl << "!!! SAUT !!!" <<endl << endl << endl;
     }
 }
 
@@ -66,8 +69,8 @@ void Perso::Grimper(int ** map, Direction direction)
         new_x += vitesseGrimper;
     }
     GetCases(map, new_x, new_y, casesX);
-    cout << "x = " << new_x << " et x + largeur = " << new_x + largeurPerso << endl;
-    cout << "y = " << new_y << " et y + taille = " << new_y + hauteurPerso << endl;
+    //cout << "x = " << new_x << " et x + largeur = " << new_x + largeurPerso << endl;
+    //cout << "y = " << new_y << " et y + taille = " << new_y + hauteurPerso << endl;
     if (direction == Direction::Gauche && (CollisionCase(casesX[0]) || CollisionCase(casesX[4]) || CollisionCase(casesX[5])))
     {   //Collision gauche
         new_dx = dimCase - new_x % dimCase;
@@ -91,8 +94,8 @@ void Perso::Grimper(int ** map, Direction direction)
         new_y += vitesseGrimper;
     }
     GetCases(map, new_x, new_y, casesY);
-    cout << "x = " << new_x << " et x + taille = " << new_x + largeurPerso << endl;
-    cout << "y = " << new_y << " et y + taille = " << new_y + hauteurPerso << endl;
+    //cout << "x = " << new_x << " et x + taille = " << new_x + largeurPerso << endl;
+    //cout << "y = " << new_y << " et y + taille = " << new_y + hauteurPerso << endl;
     if (CollisionCase(casesY[0]) || CollisionCase(casesY[1]))
     {   //Collision au plafond
         new_dy = dimCase - new_y % dimCase;
@@ -131,8 +134,8 @@ void Perso::Deplacer(int ** map, Direction direction)
         new_x += vitesseLaterale;
     }
     GetCases(map, new_x, new_y, casesX);
-    cout << "x = " << new_x << " et x + largeur = " << new_x + largeurPerso << endl;
-    cout << "y = " << new_y << " et y + taille = " << new_y + hauteurPerso << endl;
+    //cout << "x = " << new_x << " et x + largeur = " << new_x + largeurPerso << endl;
+    //cout << "y = " << new_y << " et y + taille = " << new_y + hauteurPerso << endl;
     if (direction == Direction::Gauche && (CollisionCase(casesX[0]) || CollisionCase(casesX[4]) || CollisionCase(casesX[5])))
     {   //Collision gauche
         new_dx = dimCase - new_x % dimCase;
@@ -151,8 +154,8 @@ void Perso::Deplacer(int ** map, Direction direction)
     cout << "vSaut = " << _vSaut << endl;
     new_y -= _vSaut;
     GetCases(map, new_x, new_y, casesY);
-    cout << "x = " << new_x << " et x + taille = " << new_x + largeurPerso << endl;
-    cout << "y = " << new_y << " et y + taille = " << new_y + hauteurPerso << endl;
+    //cout << "x = " << new_x << " et x + taille = " << new_x + largeurPerso << endl;
+    //cout << "y = " << new_y << " et y + taille = " << new_y + hauteurPerso << endl;
     if (CollisionCase(casesY[0]) || CollisionCase(casesY[1]))
     {   //Collision au plafond
         new_dy = dimCase - new_y % dimCase;
@@ -235,7 +238,7 @@ void Perso::GetCases(int ** map, int x, int y, int cases[6])
             cases[5] = map[case_y + 1][case_x];
         } 
     }
-    cout << "cases = " << cases[0] << "," << cases[1] << "," << cases[2] << "," << cases[3] << "," << cases[4] << "," << cases[5] << endl;
+    //cout << "cases = " << cases[0] << "," << cases[1] << "," << cases[2] << "," << cases[3] << "," << cases[4] << "," << cases[5] << endl;
 }
 
 bool Perso::CollisionCase(int valCase)

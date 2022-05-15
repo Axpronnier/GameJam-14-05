@@ -2,7 +2,7 @@
 
 Controller::Controller(SDL_Renderer *renderer)
 {
-    _personnage = *new Perso();
+    _personnage = * new Perso(51,51);
     ifstream mapfile;
     mapfile.open("map.txt");
     mapfile >> _mapLines; //flux.get pour récup tout, ptet getline pour récup qu'une ligne
@@ -117,7 +117,6 @@ void Controller::controller(bool userInput[], int clickX, int clickY, SDL_Render
         if (userInput[2])
         {
             _personnage.Sauter(_map);
-            _personnage.Deplacer(_map, Direction::Aucune);
         }
         if (!userInput[0] || !userInput[1])
         {
@@ -149,6 +148,9 @@ void Controller::controller(bool userInput[], int clickX, int clickY, SDL_Render
             }
             std::cout << "forcol";
         }
+        _collectibles[c].Afficher(renderer ,_personnage.GetX(),_personnage.GetY());
+        std::cout << "forcol";
+    }
 
         for (int i = 0; i < _ninteractibles; ++i)
         {

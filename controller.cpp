@@ -1,7 +1,7 @@
 #include "controller.hpp"
 
 
-Controller::Controller ()
+Controller::Controller (SDL_Renderer *renderer)
 {
     _personnage = * new Perso();
     ifstream mapfile;
@@ -9,14 +9,45 @@ Controller::Controller ()
     mapfile >> _mapLines; //flux.get pour récup tout, ptet getline pour récup qu'une ligne
     mapfile >> _mapCol; 
     _map = (int **) malloc(_mapLines*sizeof(int *));
+    char txtLigne[_mapCol+3];
     for (int i=0;i<_mapLines;++i)
     {
         _map[i]=(int *) malloc(_mapCol*sizeof(int));
-        //remplir le _map[i] grace au fichier
+        mapfile >> txtLigne;
+        for (int j=0;j<_mapCol;j++)
+        {
+            if (txtLigne[j]=='0') {_map[i][j]=0;}
+            if (txtLigne[j]=='1') {_map[i][j]=1;}
+            if (txtLigne[j]=='2') {_map[i][j]=2;}
+        }
     }
+    mapfile.close();
+
+    ifstream collecfile;
+    int x;
+    int y;
+    int type;
+    char * texturetext;
+    SDL_Texture * texture;
+
+    collecfile.open("collectible.txt");
+    collecfile >> _ncollectibles;
+    std::cout << _ncollectibles << std::endl;
+    for (int i=0;i<_ncollectibles;++i)
+    {
+        collecfile >> type;
+        collecfile >> x;
+        collecfile >> y;
+        collecfile >> texturetext;
+        texture = chargertexture(renderer,texturetext);
+        _collectibles[i]=Collectible(x,y,texture,type);
+        std::cout << x << " " << y << " " << texturetext << " " << type << std::endl;
+    }
+    
+
 }
 
-void Controller::controller(bool userInput[], int clickX, int clickY) // 0 : droite, 1 : gauche, 2: haut, 3: bas
+void Controller::controller(bool userInput[], int clickX, int clickY, SDL_Renderer * renderer) // 0 : droite, 1 : gauche, 2: haut, 3: bas
 {
     // Mouvement
     if (userInput[0])
@@ -37,7 +68,7 @@ void Controller::controller(bool userInput[], int clickX, int clickY) // 0 : dro
         _personnage.Grimper(_map,Direction::Bas);
     }
 
-    //afficherMap(_map,_personnage);
+    //afficher_map(_map,_personnage);
 
     // CHECK CLICK
     int clickMapX= _personnage.GetX() + WPERSO/2 - WSCREEN/2 + clickX;
@@ -54,10 +85,11 @@ void Controller::controller(bool userInput[], int clickX, int clickY) // 0 : dro
             _collectibles[c].SetAfficher(false);
         }
         if (_collectibles[c].GetX()/SIZECELL<_personnage.GetX()+(2*WSCREEN/3) && _collectibles[c].GetX()/SIZECELL>_personnage.GetX()-(2*WSCREEN/3) && _collectibles[c].GetY()/SIZECELL<_personnage.GetY()+(2*HSCREEN/3) && _collectibles[c].GetY()/SIZECELL>_personnage.GetY()-(2*HSCREEN/3)) {
-            //_collectibles[c].afficher(_personnage.GetX(),_personnage.GetY());
+            _collectibles[c].Afficher(renderer ,_personnage.GetX(),_personnage.GetY());
         } 
     }
 
+    
     for (int i=0; i<_ninteractibles; ++i)
     {
         if (_interactibles[i].GetX()/SIZECELL==clickedCellX && _interactibles[i].GetY()/SIZECELL==clickedCellY)
@@ -68,6 +100,7 @@ void Controller::controller(bool userInput[], int clickX, int clickY) // 0 : dro
             //_interactibles[i].afficher(_personnage.GetX(),_personnage.GetY());
         } 
     }
+    
 
-    //Perso.afficher();
+    //_perso.afficher();
 }

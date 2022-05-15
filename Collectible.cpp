@@ -1,5 +1,11 @@
 #include "Collectible.hpp"
 
+Collectible::Collectible(int x, int y, SDL_Texture * texture, int type) :
+    _x{x}, _y{y}, _texture{texture}, _afficher{true}, _type{type} {};
+
+Collectible::Collectible(int x, int y, SDL_Texture * texture, bool afficher, int type):
+    _x{x}, _y{y}, _texture{texture}, _afficher{afficher}, _type{type} {};
+
 void Collectible::Afficher(SDL_Renderer* renderer,int posx, int posy)
 {
     SDL_Rect destination;

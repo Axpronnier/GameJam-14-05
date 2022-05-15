@@ -60,6 +60,7 @@ Controller::Controller(SDL_Renderer *renderer)
     interacfile >> _ninteractibles;
     std::cout << _ninteractibles << std::endl;
     _interactibles = (Interactible *)malloc(_ninteractibles * sizeof(Interactible));*/
+    _ninteractibles=9;
     _interactibles = (Interactible **)malloc(9*sizeof(Interactible*));
     SDL_Texture* texturebouton[2];
     texturebouton[0]=chargertexture(renderer,"sprit/Bouton1.png");
@@ -127,51 +128,40 @@ void Controller::controller(bool userInput[], int clickX, int clickY, SDL_Render
     afficher_map(renderer, _map, _personnage.GetX(), _personnage.GetY(), tab_texture);
 
     // CHECK CLICK
-    if (clickX != -1)
+
+    int clickMapX = _personnage.GetX() + WPERSO / 2 - WSCREEN / 2 + clickX;
+    int clickMapY = _personnage.GetY() + HPERSO / 2 - HSCREEN / 2 + clickY;
+
+    int clickedCellX = clickMapX / SIZECELL;
+    int clickedCellY = clickMapY / SIZECELL;
+    for (int c = 0; c < _ncollectibles; ++c)
     {
-        int clickMapX = _personnage.GetX() + WPERSO / 2 - WSCREEN / 2 + clickX;
-        int clickMapY = _personnage.GetY() + HPERSO / 2 - HSCREEN / 2 + clickY;
-
-        int clickedCellX = clickMapX / SIZECELL;
-        int clickedCellY = clickMapY / SIZECELL;
-        std::cout << "controller" << std::endl;
-        for (int c = 0; c < _ncollectibles; ++c)
+        std::cout << clickMapX << " " << _collectibles[c].GetX() << std::endl ;
+        if ((clickMapX > _collectibles[c].GetX()) && (clickMapX < (_collectibles[c].GetX() + SIZECELL)) && (clickX!=-1))
         {
-            if (_collectibles[c].GetX() / SIZECELL == clickedCellX && _collectibles[c].GetY() / SIZECELL == clickedCellY)
-            {
-                _personnage.AjouterInventaire(_collectibles[c]);
-                _collectibles[c].SetAfficher(false);
-            }
-            if (_collectibles[c].GetX() / SIZECELL < _personnage.GetX() + (2 * WSCREEN / 3) && _collectibles[c].GetX() / SIZECELL > _personnage.GetX() - (2 * WSCREEN / 3) && _collectibles[c].GetY() / SIZECELL < _personnage.GetY() + (2 * HSCREEN / 3) && _collectibles[c].GetY() / SIZECELL > _personnage.GetY() - (2 * HSCREEN / 3))
-            {
-                _collectibles[c].Afficher(renderer, _personnage.GetX(), _personnage.GetY());
-            }
-            std::cout << "forcol";
+            _personnage.AjouterInventaire(_collectibles[c]);
+            _collectibles[c].SetAfficher(false);
         }
-        _collectibles[c].Afficher(renderer ,_personnage.GetX(),_personnage.GetY());
-        std::cout << "forcol";
+        _collectibles[c].Afficher(renderer, _personnage.GetX(), _personnage.GetY());
+        //std::cout << "forcol";
     }
 
-        for (int i = 0; i < _ninteractibles; ++i)
+    for (int i = 0; i < _ninteractibles; ++i)
+    {
+        if (_interactibles[i]->GetX() / SIZECELL == clickedCellX && _interactibles[i]->GetY() / SIZECELL == clickedCellY)
         {
-            if (_interactibles[i]->GetX() / SIZECELL == clickedCellX && _interactibles[i]->GetY() / SIZECELL == clickedCellY)
+            switch (_interactibles[i]->GetEtat())
             {
-                switch (_interactibles[i]->GetEtat())
-                {
-                    case 1:
-                        Enigme_carre_blanc(_interactibles[i]);
-                        break;
-                    default:
-                        std::cout<< "ahahahah c'est pas un vrai truc a cliquer ohohoh" << std::endl;
-                }
+                case 1:
+                    Enigme_carre_blanc(_interactibles[i]);
+                    break;
+                default:
+                    std::cout<< "ahahahah c'est pas un vrai truc a cliquer ohohoh" << std::endl;
             }
-            if (_interactibles[i]->GetX() / SIZECELL < _personnage.GetX() + (2 * WSCREEN / 3) && _interactibles[i]->GetX() / SIZECELL > _personnage.GetX() - (2 * WSCREEN / 3) && _interactibles[i]->GetY() / SIZECELL < _personnage.GetY() + (2 * HSCREEN / 3) && _interactibles[i]->GetY() / SIZECELL > _personnage.GetY() - (2 * HSCREEN / 3))
-            {
-                _interactibles[i]->Afficher(renderer,_personnage.GetX(),_personnage.GetY());
-            }
-            std::cout << "forint";
         }
+        _interactibles[i]->Afficher(renderer,_personnage.GetX(),_personnage.GetY());
+        //std::cout << "forint";
     }
 
-    _personnage.Afficher(renderer);
+    //_personnage.Afficher(renderer);
 }

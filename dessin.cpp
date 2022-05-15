@@ -48,7 +48,7 @@ void afficher_map(SDL_Renderer *renderer, int **map, int posx, int posy, SDL_Tex
                     ycase = y / SIZECELL;
                     destination.x = xcase * SIZECELL -left;
                     destination.y = ycase * SIZECELL - up;
-                    SDL_RenderCopy(renderer,tab_texture[map[xcase][ycase]],NULL,&destination);
+                    SDL_RenderCopy(renderer,tab_texture[map[ycase][xcase]],NULL,&destination);
                 }
                 y = y + SIZECELL;
             }

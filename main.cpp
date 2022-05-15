@@ -173,7 +173,7 @@ int main(int argv, char ** argc)
         perso.Afficher(renderer);
         SDL_RenderPresent(renderer);
         for (int k=0;k<4;k++) user_input[k]=false;
-        SDL_Delay(10);
+        SDL_Delay(30);
     }
 
     SDL_DestroyRenderer(renderer);

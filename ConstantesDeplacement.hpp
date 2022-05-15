@@ -17,9 +17,9 @@ const int mapW = 1000;
 const int mapMaxColumn = mapW / dimCase;
 const int mapMaxRow = mapH / dimCase;
 
-const int gravite = 5;
-const int vitesseSaut = 30;
-const int vitesseLaterale = 5;
-const int vitesseGrimper = 5;
+const int gravite = 1;
+const int vitesseSaut = 15;
+const int vitesseLaterale = 10;
+const int vitesseGrimper = 20;
 
 #endif

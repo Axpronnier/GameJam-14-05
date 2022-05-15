@@ -169,11 +169,12 @@ int main(int argv, char ** argc)
             }
             break;
         }
-        afficher_map(renderer,control._map,posx,posy,tab_texture);
+        
         for (int k=0;k<9;k++)
         {
             stock[k]->Afficher(renderer,posx,posy);
         }
+        control.controller(user_input,0,0,renderer,tab_texture);
         perso.Afficher(renderer);
         SDL_RenderPresent(renderer);
         for (int k=0;k<4;k++) user_input[k]=false;

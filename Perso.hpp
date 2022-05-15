@@ -27,16 +27,15 @@ class Perso {
         void Afficher(SDL_Renderer *renderer);
         
         void Sauter(int ** map);
+        int TypeDeplacement(int ** map);
         void Grimper(int ** map, Direction direction);
         void Deplacer(int ** map, Direction direction);
         void AjouterInventaire(Collectible &objet);
         void RetirerInventaire(int index);
 
     private:
-        void Bordure(int x, int y, bool coins[4]);
-        void Echelle(int ** map, int x, int y, bool coins[4]); 
-        void Vide(int ** map, int x, int y, bool coins[4]);
-        void Collision(int ** map, int x, int y, bool coins[4]);
+        void GetCases(int ** map, int x, int y, int cases[6]);
+        bool CollisionCase(int valCase);
 };
 
 #endif

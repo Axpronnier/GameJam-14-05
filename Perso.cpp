@@ -29,11 +29,87 @@ void Perso::Sauter(int ** map)
     }
 }
 
-void Perso::Grimper(int ** map, Direction direction)
+int Perso::TypeDeplacement(int ** map)
 {
     int cases[6];
+    int res = 0;
 
-    GetCases(map, _x - 1, _y - 1, cases);
+    GetCases(map, _x, _y, cases);
+
+    for (int i = 0; i < 6; i++)
+    {
+        if (cases[i] == 2)
+        {   //On est sur une échelle
+            res = 1;
+        }
+    }
+
+    return res;
+}
+
+void Perso::Grimper(int ** map, Direction direction)
+{
+    int casesX[6];
+    int casesY[6];
+    int new_x = _x;
+    int new_y = _y;
+    int new_dx;
+    int new_dy;
+
+    //Deplacmeent horizontal
+    if (direction == Direction::Gauche)
+    {
+        new_x -= vitesseGrimper;
+    }
+    else if (direction == Direction::Droite)
+    {
+        new_x += vitesseGrimper;
+    }
+    GetCases(map, new_x, new_y, casesX);
+    cout << "x = " << new_x << " et x + largeur = " << new_x + largeurPerso << endl;
+    cout << "y = " << new_y << " et y + taille = " << new_y + hauteurPerso << endl;
+    if (direction == Direction::Gauche && (CollisionCase(casesX[0]) || CollisionCase(casesX[4]) || CollisionCase(casesX[5])))
+    {   //Collision gauche
+        new_dx = dimCase - new_x % dimCase;
+        new_x += new_dx;
+        cout << "Collision gauche" << endl;
+    }
+    else if (direction == Direction::Droite && (CollisionCase(casesX[1]) || CollisionCase(casesX[2]) || CollisionCase(casesX[3])))
+    {   //Collision droite le cas super chiant
+        new_dx = (new_x + largeurPerso) % dimCase;
+        new_x -= new_dx;
+        cout << "Collision droite" << endl;
+    }
+
+    //deplacement vertical
+    if (direction == Direction::Haut)
+    {
+        new_y -= vitesseGrimper;
+    }
+    else if (direction == Direction::Bas)
+    {
+        new_y += vitesseGrimper;
+    }
+    GetCases(map, new_x, new_y, casesY);
+    cout << "x = " << new_x << " et x + taille = " << new_x + largeurPerso << endl;
+    cout << "y = " << new_y << " et y + taille = " << new_y + hauteurPerso << endl;
+    if (CollisionCase(casesY[0]) || CollisionCase(casesY[1]))
+    {   //Collision au plafond
+        new_dy = dimCase - new_y % dimCase;
+        new_y += new_dy;
+        _vSaut = 0;
+        cout << "Collision plafond" << endl;
+    }
+    else if (CollisionCase(casesY[3]) || CollisionCase(casesY[4]))
+    {   //Collision au sol, le cas super chiant
+        new_dy = (new_y + hauteurPerso) % dimCase;
+        new_y -= new_dy;
+        _vSaut = 0;
+        cout << "Collision sol" << endl;
+    }
+
+    _x = new_x;
+    _y = new_y;
 }
 
 void Perso::Deplacer(int ** map, Direction direction)

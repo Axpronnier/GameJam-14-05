@@ -27,6 +27,7 @@ class Perso {
         void Afficher(SDL_Renderer *renderer);
         
         void Sauter(int ** map);
+        int TypeDeplacement(int ** map);
         void Grimper(int ** map, Direction direction);
         void Deplacer(int ** map, Direction direction);
         void AjouterInventaire(Collectible &objet);

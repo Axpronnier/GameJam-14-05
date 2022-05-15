@@ -27,23 +27,31 @@ Controller::Controller (SDL_Renderer *renderer)
     int x;
     int y;
     int type;
-    char * texturetext;
+    char texturetext[200];
     SDL_Texture * texture;
 
     collecfile.open("collectible.txt");
     collecfile >> _ncollectibles;
     std::cout << _ncollectibles << std::endl;
-    for (int i=0;i<_ncollectibles;++i)
+    _collectibles=(Collectible *) malloc(_ncollectibles*sizeof(Collectible));
+
+    for (int k=0;k<_ncollectibles;++k)
     {
         collecfile >> type;
         collecfile >> x;
         collecfile >> y;
         collecfile >> texturetext;
         texture = chargertexture(renderer,texturetext);
-        _collectibles[i]=Collectible(x,y,texture,type);
+        _collectibles[k]= Collectible(x,y,texture,type);
         std::cout << x << " " << y << " " << texturetext << " " << type << std::endl;
     }
-    
+    collecfile.close();
+
+    ifstream interacfile;
+    interacfile.open("interactible.txt");
+    interacfile >> _ninteractibles;
+    std::cout << _ninteractibles << std::endl;
+    _interactibles=(Interactible *) malloc(_ninteractibles  *sizeof(Interactible));
 
 }
 

@@ -72,6 +72,7 @@ int main(int argv, char ** argc)
 
     SDL_Event event;
     bool running = true;
+    bool user_input[4]={false,false,false,false}; //{droite,gauche,haut,bas}
     while (running)
     {
         while (SDL_PollEvent(&event))
@@ -98,6 +99,30 @@ int main(int argv, char ** argc)
                 case SDLK_ESCAPE:
                     running = false;
                     break;
+                case SDLK_RIGHT:
+                    user_input[0]=true;
+                    break;
+                case SDLK_d:
+                    user_input[0]=true;
+                    break;
+                case SDLK_LEFT:
+                    user_input[1]=true;
+                    break;
+                case SDLK_q:
+                    user_input[1]=true;
+                    break;
+                case SDLK_UP:
+                    user_input[2]=true;
+                    break;
+                case SDLK_z:
+                    user_input[2]=true;
+                    break;
+                case SDLK_DOWN:
+                    user_input[3]=true;
+                    break;
+                case SDLK_s:
+                    user_input[3]=true;
+                    break;
                 }
                 break;
             case SDL_MOUSEBUTTONDOWN:
@@ -115,6 +140,7 @@ int main(int argv, char ** argc)
         bouton.Afficher(renderer,posx,posy);
         perso.Afficher(renderer);
         SDL_RenderPresent(renderer);
+        for (int k=0;k<4;k++) user_input[k]=false;
         SDL_Delay(10);
     }
 

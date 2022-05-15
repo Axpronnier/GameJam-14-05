@@ -12,13 +12,9 @@ class Personnage {};
 
 class Controller {
 public:
-    Controller ();
-    void controller(bool *, int, int);
+    Controller (SDL_Renderer*);
+    void controller(bool *, int, int, SDL_Renderer*);
     int ** _map;
-<<<<<<< HEAD
-=======
-private:
->>>>>>> 58f473a4de78f151dfecfee861be069ea59ea43d
     Perso _personnage;
     int _mapLines;
     int _mapCol;

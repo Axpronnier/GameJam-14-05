@@ -58,22 +58,39 @@ Controller::Controller (SDL_Renderer *renderer)
 void Controller::controller(bool userInput[], int clickX, int clickY, SDL_Renderer * renderer,SDL_Texture* tab_texture[2]) // 0 : droite, 1 : gauche, 2: haut, 3: bas
 {
     // Mouvement
-    if (userInput[0])
+    
+    if (_personnage.TypeDeplacement(_map))
     {
-        _personnage.Deplacer(_map,Direction::Droite);
+        if (userInput[2])
+        {
+            _personnage.Grimper(_map,Direction::Haut);
+        }
+        if (userInput[3])
+        {
+            _personnage.Grimper(_map,Direction::Bas);
+        }
+        if (userInput[0])
+        {
+            _personnage.Grimper(_map,Direction::Droite);
+        }
+        if (userInput[1])
+        {
+            _personnage.Grimper(_map,Direction::Gauche);
+        }
     }
-    if (userInput[1])
-    {
-        _personnage.Deplacer(_map,Direction::Gauche);
-    }
-    if (userInput[2])
-    {
-        _personnage.Grimper(_map,Direction::Haut);
-        _personnage.Sauter(_map);
-    }
-    if (userInput[3])
-    {
-        _personnage.Grimper(_map,Direction::Bas);
+    else {
+        if (userInput[0])
+        {
+            _personnage.Deplacer(_map,Direction::Droite);
+        }
+        if (userInput[1])
+        {
+            _personnage.Deplacer(_map,Direction::Gauche);
+        }
+        if (userInput[2])
+        {
+            _personnage.Sauter(_map);
+        }
     }
 
     afficher_map(renderer,_map,_personnage.GetX(),_personnage.GetY(),tab_texture);
@@ -84,7 +101,7 @@ void Controller::controller(bool userInput[], int clickX, int clickY, SDL_Render
 
     int clickedCellX=clickMapX/SIZECELL;
     int clickedCellY=clickMapY/SIZECELL;
-
+    std::cout << "controller" << std::endl;
     for (int c=0; c<_ncollectibles; ++c)
     {
         if (_collectibles[c].GetX()/SIZECELL==clickedCellX && _collectibles[c].GetY()/SIZECELL==clickedCellY)
@@ -95,6 +112,7 @@ void Controller::controller(bool userInput[], int clickX, int clickY, SDL_Render
         if (_collectibles[c].GetX()/SIZECELL<_personnage.GetX()+(2*WSCREEN/3) && _collectibles[c].GetX()/SIZECELL>_personnage.GetX()-(2*WSCREEN/3) && _collectibles[c].GetY()/SIZECELL<_personnage.GetY()+(2*HSCREEN/3) && _collectibles[c].GetY()/SIZECELL>_personnage.GetY()-(2*HSCREEN/3)) {
             _collectibles[c].Afficher(renderer ,_personnage.GetX(),_personnage.GetY());
         } 
+        std::cout << "forcol";
     }
 
     
@@ -107,8 +125,8 @@ void Controller::controller(bool userInput[], int clickX, int clickY, SDL_Render
         if (_interactibles[i].GetX()/SIZECELL<_personnage.GetX()+(2*WSCREEN/3) && _interactibles[i].GetX()/SIZECELL>_personnage.GetX()-(2*WSCREEN/3) && _interactibles[i].GetY()/SIZECELL<_personnage.GetY()+(2*HSCREEN/3) && _interactibles[i].GetY()/SIZECELL>_personnage.GetY()-(2*HSCREEN/3)) {
             //_interactibles[i].afficher(renderer,_personnage.GetX(),_personnage.GetY());
         } 
+        std::cout << "forint";
     }
-    
 
-    //_perso.afficher();
+    _personnage.Afficher(renderer);
 }

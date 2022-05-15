@@ -55,7 +55,7 @@ Controller::Controller (SDL_Renderer *renderer)
 
 }
 
-void Controller::controller(bool userInput[], int clickX, int clickY, SDL_Renderer * renderer) // 0 : droite, 1 : gauche, 2: haut, 3: bas
+void Controller::controller(bool userInput[], int clickX, int clickY, SDL_Renderer * renderer,SDL_Texture* tab_texture[2]) // 0 : droite, 1 : gauche, 2: haut, 3: bas
 {
     // Mouvement
     if (userInput[0])
@@ -76,7 +76,7 @@ void Controller::controller(bool userInput[], int clickX, int clickY, SDL_Render
         _personnage.Grimper(_map,Direction::Bas);
     }
 
-    //afficher_map(_map,_personnage);
+    afficher_map(renderer,_map,_personnage.GetX(),_personnage.GetY(),tab_texture);
 
     // CHECK CLICK
     int clickMapX= _personnage.GetX() + WPERSO/2 - WSCREEN/2 + clickX;

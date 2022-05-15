@@ -19,7 +19,7 @@ class Collectible {
         bool GetAfficher() const { return _afficher; }
         void SetAfficher(bool afficher) {_afficher = afficher; }
 
-        void afficher(SDL_Renderer* renderer,int posx, int posy);
+        void Afficher(SDL_Renderer* renderer,int posx, int posy);
         void Deplacer(int x, int y);
 };
 

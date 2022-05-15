@@ -24,7 +24,7 @@ class Interactible {
         void ExecEnigme() { _enigme(*this); }
         void SetEtat(int etat) {_etat = etat; }
 
-        void afficher(SDL_Renderer* renderer,int posx, int posy);
+        void Afficher(SDL_Renderer* renderer,int posx, int posy);
         void Deplacer(int x, int y);
 };
 

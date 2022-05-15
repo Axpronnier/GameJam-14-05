@@ -62,14 +62,14 @@ Controller::Controller(SDL_Renderer *renderer)
     _interactibles = (Interactible *)malloc(_ninteractibles * sizeof(Interactible));*/
     _ninteractibles=9;
     _interactibles = (Interactible **)malloc(9*sizeof(Interactible*));
-    SDL_Texture* texturebouton[2];
+    SDL_Texture** texturebouton = (SDL_Texture**) malloc(2*sizeof(SDL_Texture*));
     texturebouton[0]=chargertexture(renderer,"sprit/Bouton1.png");
     texturebouton[1]=chargertexture(renderer,"sprit/Bouton2.png");
     for (int k=0;k<3;k++)
     {
         for (int i=0;i<3;i++)
         {
-            Interactible* temp=new Interactible((k+2)*SIZECELL,(i+2)*SIZECELL,texturebouton,0,1);
+            Interactible* temp=new Interactible((k+20)*SIZECELL,(i+20)*SIZECELL,texturebouton,rand()%2,1);
             _interactibles[3*k+i]=temp;
         }
     }
@@ -150,7 +150,7 @@ void Controller::controller(bool userInput[], int clickX, int clickY, SDL_Render
     {
         if (_interactibles[i]->GetX() / SIZECELL == clickedCellX && _interactibles[i]->GetY() / SIZECELL == clickedCellY)
         {
-            switch (_interactibles[i]->GetEtat())
+            switch (_interactibles[i]->GetEnigme())
             {
                 case 1:
                     Enigme_carre_blanc(_interactibles[i]);

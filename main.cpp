@@ -42,9 +42,10 @@ int main(int argv, char ** argc)
     //font3 = TTF_OpenFont("../res/arial.ttf", 23);
 
     //mon test pour l'affichage de la map
-    SDL_Texture* tab_texture[2];
-    tab_texture[0]=chargertexture(renderer, "sprit/Bleu.png");
-    tab_texture[1]=chargertexture(renderer, "sprit/marron.jpg");
+    SDL_Texture* tab_texture[3];
+    tab_texture[0]=chargertexture(renderer, "sprit/Fond.png");
+    tab_texture[1]=chargertexture(renderer, "sprit/Mur.png");
+    tab_texture[2]=chargertexture(renderer,"sprit/Echelle.png");
     SDL_Texture* textureperso=chargertexture(renderer,"sprit/personnage.webp");
     SDL_Texture* texturebouton[2];
     texturebouton[0]=chargertexture(renderer,"sprit/bouton.jpeg");
@@ -56,7 +57,7 @@ int main(int argv, char ** argc)
         map[k]=(int*)malloc(50*sizeof(int*));
         for (int i=0;i<50;i++)
         {
-            map[k][i]=rand()%2;
+            map[k][i]=rand()%3;
         }
     }
     Interactible* stock[9];
@@ -171,6 +172,8 @@ int main(int argv, char ** argc)
         perso.Afficher(renderer);
         SDL_RenderPresent(renderer);
         for (int k=0;k<4;k++) user_input[k]=false;
+        posx++;
+        posy++;
         SDL_Delay(10);
     }
 

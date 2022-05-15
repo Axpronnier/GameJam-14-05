@@ -76,7 +76,7 @@ int main(int argv, char ** argc)
             stock[k]->AddElement(stock[i]);
         }
     }
-
+    Controller control(renderer);
     int posx=50;
     int posy=100;
     Perso perso(posx,posy,nullptr,textureperso);
@@ -163,7 +163,7 @@ int main(int argv, char ** argc)
             }
             break;
         }
-        afficher_map(renderer,map,posx,posy,tab_texture);
+        afficher_map(renderer,control._map,posx,posy,tab_texture);
         for (int k=0;k<9;k++)
         {
             stock[k]->Afficher(renderer,posx,posy);

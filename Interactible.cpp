@@ -1,9 +1,12 @@
 #include "Interactible.hpp"
 
-Interactible::Interactible(int x, int y, SDL_Texture * texture):
+Interactible::Interactible(int x, int y, SDL_Texture ** texture):
     _x(x),_y(y),_texture(texture)
 {}
 
+Interactible::Interactible(int x, int y, SDL_Texture ** texture, int etat, int enigme):
+    _x(x),_y(y),_texture(texture),_etat(etat),_enigme(enigme),_resolut(false),_Element()
+{}
 
 void Interactible::Afficher(SDL_Renderer *renderer, int posx, int posy)
 {
@@ -12,7 +15,7 @@ void Interactible::Afficher(SDL_Renderer *renderer, int posx, int posy)
     destination.y=_y-posy+HSCREEN/2-HPERSO/2;
     destination.w=SIZECELL;
     destination.h=SIZECELL;
-    SDL_RenderCopy(renderer,_texture,NULL,&destination);
+    SDL_RenderCopy(renderer,_texture[_etat],NULL,&destination);
 }
 
 void Interactible::Deplacer(int x, int y)

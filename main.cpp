@@ -46,7 +46,9 @@ int main(int argv, char ** argc)
     tab_texture[0]=chargertexture(renderer, "sprit/Bleu.png");
     tab_texture[1]=chargertexture(renderer, "sprit/marron.jpg");
     SDL_Texture* textureperso=chargertexture(renderer,"sprit/personnage.webp");
-    SDL_Texture* texturebouton=chargertexture(renderer,"sprit/bouton.jpeg");
+    SDL_Texture* texturebouton[2];
+    texturebouton[0]=chargertexture(renderer,"sprit/bouton.jpeg");
+    texturebouton[1]=chargertexture(renderer,"sprit/boutonb.jpeg");
 
     int** map=(int**)malloc(50*sizeof(int*));
     for (int k=0;k<50;k++)
@@ -57,10 +59,27 @@ int main(int argv, char ** argc)
             map[k][i]=rand()%2;
         }
     }
-    int posx=0;
-    int posy=0;
+    Interactible* stock[9];
+    for (int k=0;k<3;k++)
+    {
+        for (int i=0;i<3;i++)
+        {
+            Interactible temp(k*SIZECELL,i*SIZECELL,texturebouton,0,1);
+            stock[3*k+i]=&temp;
+        }
+    }
+
+    for (int k=0;k<9;k++)
+    {
+        for (int i=0;i<9;i++)
+        {
+            stock[k]->GetElement().push_back(stock[i]);
+        }
+    }
+
+    int posx=50;
+    int posy=100;
     Perso perso(posx,posy,nullptr,textureperso);
-    Interactible bouton(50,50,texturebouton);
     int flags = IMG_INIT_JPG | IMG_INIT_PNG;
     int initted = 0;
     initted = IMG_Init(flags);
@@ -134,10 +153,11 @@ int main(int argv, char ** argc)
             }
             break;
         }
-        posx=posx+1;
-        posy=posy+1;
         afficher_map(renderer,map,posx,posy,tab_texture);
-        bouton.Afficher(renderer,posx,posy);
+        for (int k=0;k<9;k++)
+        {
+            stock[k]->Afficher(renderer,posx,posy);
+        }
         perso.Afficher(renderer);
         SDL_RenderPresent(renderer);
         for (int k=0;k<4;k++) user_input[k]=false;

@@ -64,8 +64,8 @@ int main(int argv, char ** argc)
     {
         for (int i=0;i<3;i++)
         {
-            Interactible temp(k*SIZECELL,i*SIZECELL,texturebouton,0,1);
-            stock[3*k+i]=&temp;
+            Interactible* temp=new Interactible((k+2)*SIZECELL,(i+2)*SIZECELL,texturebouton,0,1);
+            stock[3*k+i]=temp;
         }
     }
 
@@ -73,7 +73,7 @@ int main(int argv, char ** argc)
     {
         for (int i=0;i<9;i++)
         {
-            stock[k]->GetElement().push_back(stock[i]);
+            stock[k]->AddElement(stock[i]);
         }
     }
 
@@ -146,6 +146,16 @@ int main(int argv, char ** argc)
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 std::cout << event.button.x << event.button.y << std::endl;
+                for (int k=0;k<9;k++)
+                {
+                    if (event.button.x>stock[k]->GetX() and event.button.x<(stock[k]->GetX()+SIZECELL))
+                    {
+                        if (event.button.y>stock[k]->GetY() and event.button.y<(stock[k]->GetY()+SIZECELL))
+                        {
+                            Enigme_carre_blanc(stock[k]);
+                        }
+                    }
+                }
                 break;
             case SDL_QUIT:
                 running = 0;

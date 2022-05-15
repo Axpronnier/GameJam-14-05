@@ -27,6 +27,7 @@ class Interactible {
         void SetEtat(int etat) {_etat = etat; }
         void SetResolut(bool resolut) {_resolut=resolut;}
         std::list<Interactible*> GetElement() {return _Element;}
+        void AddElement(Interactible* i) {_Element.push_back(i);}
 
         void Afficher(SDL_Renderer* renderer,int posx, int posy);
         void Deplacer(int x, int y);

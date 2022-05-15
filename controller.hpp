@@ -5,6 +5,7 @@
 #include "Perso.hpp"
 #include "Collectible.hpp"
 #include "Interactible.hpp"
+#include "Enigme.hpp"
 #include <iostream>
 #include <fstream>
 

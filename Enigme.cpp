@@ -20,11 +20,11 @@ void Enigme_carre_blanc(Interactible *objet)
         }
         for (Interactible *e : (objet->GetElement()))
         {
-            map[((e->GetX() - left) / SIZECELL) - 1][((e->GetY() - up) / SIZECELL) - 1] = e;
+            map[((e->GetX() - left) / SIZECELL)][((e->GetY() - up) / SIZECELL)] = e;
         }
         //actualisation du puzzle
-        int x = ((objet->GetX() - left) / SIZECELL) - 1;
-        int y = ((objet->GetY() - up) / SIZECELL) - 1;
+        int x = ((objet->GetX() - left) / SIZECELL);
+        int y = ((objet->GetY() - up) / SIZECELL);
         for (int k = -1; k <= 1; k++)
         {
             if (x + k >= 0 and x + k <= 2)

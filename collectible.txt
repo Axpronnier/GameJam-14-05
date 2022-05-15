@@ -1,3 +1,3 @@
 2
-1 10 10 "sprit/bouton.jpeg"
-2 11 12 "sprit/bouton.jpeg"
+1 100 100 sprit/bouton.jpeg
+2 200 200 sprit/bouton.jpeg

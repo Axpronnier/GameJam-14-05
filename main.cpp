@@ -3,6 +3,7 @@
 
 int main(int argv, char ** argc)
 {  
+    Uint8 const *keystates;
     if (SDL_Init(SDL_INIT_VIDEO) == -1)
     {
         fprintf(stderr, "Erreur d'initialisation de la SDL : %s\n", SDL_GetError());
@@ -102,30 +103,6 @@ int main(int argv, char ** argc)
                 case SDLK_ESCAPE:
                     running = false;
                     break;
-                case SDLK_RIGHT:
-                    user_input[0]=true;
-                    break;
-                case SDLK_d:
-                    user_input[0]=true;
-                    break;
-                case SDLK_LEFT:
-                    user_input[1]=true;
-                    break;
-                case SDLK_q:
-                    user_input[1]=true;
-                    break;
-                case SDLK_UP:
-                    user_input[2]=true;
-                    break;
-                case SDLK_z:
-                    user_input[2]=true;
-                    break;
-                case SDLK_DOWN:
-                    user_input[3]=true;
-                    break;
-                case SDLK_s:
-                    user_input[3]=true;
-                    break;
                 }
                 break;
             case SDL_MOUSEBUTTONDOWN:
@@ -149,6 +126,23 @@ int main(int argv, char ** argc)
                 break;
             }
             break;
+        }
+        keystates = SDL_GetKeyboardState(NULL);
+        if (keystates[SDL_SCANCODE_RIGHT] or keystates[SDL_SCANCODE_D])
+        {
+            user_input[0]=true;
+        }
+        if (keystates[SDL_SCANCODE_LEFT] or keystates[SDL_SCANCODE_Q])
+        {
+            user_input[1]=true;
+        }
+        if (keystates[SDL_SCANCODE_UP] or keystates[SDL_SCANCODE_Z])
+        {
+            user_input[2]=true;
+        }
+        if (keystates[SDL_SCANCODE_DOWN] or keystates[SDL_SCANCODE_S])
+        {
+            user_input[3]=true;
         }
         
         control.controller(user_input,xsouris,ysouris,renderer,tab_texture);

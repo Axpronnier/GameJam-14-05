@@ -9,10 +9,16 @@ Controller::Controller ()
     mapfile >> _mapLines; //flux.get pour récup tout, ptet getline pour récup qu'une ligne
     mapfile >> _mapCol; 
     _map = (int **) malloc(_mapLines*sizeof(int *));
+    char txtLigne[_mapCol+3];
     for (int i=0;i<_mapLines;++i)
     {
         _map[i]=(int *) malloc(_mapCol*sizeof(int));
-        //remplir le _map[i] grace au fichier
+        for (int j=0;j<_mapCol;j++)
+        {
+            mapfile >> txtLigne;
+            if (txtLigne[j]=='1') {_map[i][j]=1;}
+            else {_map[i][j]=0;}
+        }
     }
 }
 
@@ -37,7 +43,7 @@ void Controller::controller(bool userInput[], int clickX, int clickY) // 0 : dro
         _personnage.Grimper(_map,Direction::Bas);
     }
 
-    //afficherMap(_map,_personnage);
+    //afficher_map(_map,_personnage);
 
     // CHECK CLICK
     int clickMapX= _personnage.GetX() + WPERSO/2 - WSCREEN/2 + clickX;
@@ -62,12 +68,12 @@ void Controller::controller(bool userInput[], int clickX, int clickY) // 0 : dro
     {
         if (_interactibles[i].GetX()/SIZECELL==clickedCellX && _interactibles[i].GetY()/SIZECELL==clickedCellY)
         {
-            _interactibles[i].ExecEnigme();
+            //_interactibles[i].ExecEnigme();
         }
         if (_interactibles[i].GetX()/SIZECELL<_personnage.GetX()+(2*WSCREEN/3) && _interactibles[i].GetX()/SIZECELL>_personnage.GetX()-(2*WSCREEN/3) && _interactibles[i].GetY()/SIZECELL<_personnage.GetY()+(2*HSCREEN/3) && _interactibles[i].GetY()/SIZECELL>_personnage.GetY()-(2*HSCREEN/3)) {
             //_interactibles[i].afficher(_personnage.GetX(),_personnage.GetY());
         } 
     }
 
-    //Perso.afficher();
+    //_perso.afficher();
 }

@@ -149,9 +149,13 @@ int main(int argv, char ** argc)
         perso.Afficher(renderer);
         SDL_RenderPresent(renderer);
         for (int k=0;k<4;k++) user_input[k]=false;
+<<<<<<< HEAD
+        SDL_Delay(30);
+=======
         xsouris=-1;
         ysouris=-1;
         SDL_Delay(10);
+>>>>>>> 3097fa2e3d1554d3704450d3cf5b1d6def816d1d
     }
 
     SDL_DestroyRenderer(renderer);

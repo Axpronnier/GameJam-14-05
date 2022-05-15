@@ -90,6 +90,11 @@ void Controller::controller(bool userInput[], int clickX, int clickY, SDL_Render
         if (userInput[2])
         {
             _personnage.Sauter(_map);
+            _personnage.Deplacer(_map,Direction::Aucune);
+        }
+        if (!userInput[0] || !userInput[1])
+        {
+            _personnage.Deplacer(_map,Direction::Aucune);
         }
     }
 

@@ -34,8 +34,8 @@ void afficher_map(SDL_Renderer *renderer, int **map, int posx, int posy, SDL_Tex
     int down = up + HSCREEN;
     source.x=(float)left/(float)(SIZECELL*50)*w;
     source.y=(float)up/(float)(SIZECELL*50)*h;
-    source.w=(float)WSCREEN/(float)(SIZECELL*50)*w;
-    source.h=(float)HSCREEN/(float)(SIZECELL*50)*h;
+    source.w=(float)WSCREEN/(float)(SIZECELL*50)*w*1.5;
+    source.h=(float)HSCREEN/(float)(SIZECELL*50)*h*1.5;
     SDL_RenderCopy(renderer,tab_texture[0],&source,NULL);
     int x = left;
     int y = up;

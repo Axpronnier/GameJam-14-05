@@ -48,8 +48,8 @@ int main(int argv, char ** argc)
     tab_texture[2]=chargertexture(renderer,"sprit/Echelle.png");
     SDL_Texture* textureperso=chargertexture(renderer,"sprit/personnage.webp");
     SDL_Texture* texturebouton[2];
-    texturebouton[0]=chargertexture(renderer,"sprit/bouton.jpeg");
-    texturebouton[1]=chargertexture(renderer,"sprit/boutonb.jpeg");
+    texturebouton[0]=chargertexture(renderer,"sprit/Bouton1.png");
+    texturebouton[1]=chargertexture(renderer,"sprit/Bouton2.png");
 
     int** map=(int**)malloc(50*sizeof(int*));
     for (int k=0;k<50;k++)
@@ -172,8 +172,6 @@ int main(int argv, char ** argc)
         perso.Afficher(renderer);
         SDL_RenderPresent(renderer);
         for (int k=0;k<4;k++) user_input[k]=false;
-        posx++;
-        posy++;
         SDL_Delay(10);
     }
 

@@ -25,10 +25,18 @@ SDL_Texture *creertxt(SDL_Renderer *renderer, const char *texte, TTF_Font *font,
 
 void afficher_map(SDL_Renderer *renderer, int **map, int posx, int posy, SDL_Texture **tab_texture)
 {
+    SDL_Rect source;
+    int w,h;
+    SDL_QueryTexture(tab_texture[0],NULL,NULL,&w,&h);
     int left = posx - WSCREEN / 2 + WPERSO / 2;
     int right = left + WSCREEN;
     int up = posy - HSCREEN / 2 + HPERSO / 2;
     int down = up + HSCREEN;
+    source.x=(float)left/(float)(SIZECELL*50)*w;
+    source.y=(float)up/(float)(SIZECELL*50)*h;
+    source.w=(float)WSCREEN/(float)(SIZECELL*50)*w*1.5;
+    source.h=(float)HSCREEN/(float)(SIZECELL*50)*h*1.5;
+    SDL_RenderCopy(renderer,tab_texture[0],&source,NULL);
     int x = left;
     int y = up;
     int xcase = 0;
@@ -48,7 +56,10 @@ void afficher_map(SDL_Renderer *renderer, int **map, int posx, int posy, SDL_Tex
                     ycase = y / SIZECELL;
                     destination.x = xcase * SIZECELL -left;
                     destination.y = ycase * SIZECELL - up;
-                    SDL_RenderCopy(renderer,tab_texture[map[ycase][xcase]],NULL,&destination);
+                    if (map[ycase][xcase])
+                    {
+                        SDL_RenderCopy(renderer,tab_texture[map[ycase][xcase]],NULL,&destination);
+                    }
                 }
                 y = y + SIZECELL;
             }
